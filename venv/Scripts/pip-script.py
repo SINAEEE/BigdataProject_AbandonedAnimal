@@ -1,4 +1,4 @@
-#!"D:\09. Python\001. Project\BigdataProject(AbandonedAnimal)\venv\Scripts\python.exe"
+#!"D:\09. Python\001. Project\BigdataProject_AbandonedAnimal\venv\Scripts\python.exe"
 # EASY-INSTALL-ENTRY-SCRIPT: 'pip==10.0.1','console_scripts','pip'
 __requires__ = 'pip==10.0.1'
 import re

@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="D:\09. Python\001. Project\BigdataProject(AbandonedAnimal)\venv"
+VIRTUAL_ENV="D:\09. Python\001. Project\BigdataProject_AbandonedAnimal\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set "VIRTUAL_ENV=D:\09. Python\001. Project\BigdataProject(AbandonedAnimal)\venv"
+set "VIRTUAL_ENV=D:\09. Python\001. Project\BigdataProject_AbandonedAnimal\venv"
 
 if not defined PROMPT (
     set "PROMPT=$P$G"

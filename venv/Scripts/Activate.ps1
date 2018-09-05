@@ -27,7 +27,7 @@ function global:deactivate ([switch]$NonDestructive) {
 
 deactivate -nondestructive
 
-$env:VIRTUAL_ENV="D:\09. Python\001. Project\BigdataProject(AbandonedAnimal)\venv"
+$env:VIRTUAL_ENV="D:\09. Python\001. Project\BigdataProject_AbandonedAnimal\venv"
 
 if (! $env:VIRTUAL_ENV_DISABLE_PROMPT) {
     # Set the prompt to include the env name

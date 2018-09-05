@@ -18,7 +18,7 @@ base_url='http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc
 # bgnde=20180101&endde=20180901&pageNo=1&numOfRows=10&ServiceKey=
 
 
-def crawling(
+def crawler(
         url='',
         encoding='euc-kr',
         proc=lambda html:html, #통과코드 #처리 # 실행되는지 안되는지 확인
@@ -99,7 +99,7 @@ def shelter_crawling():
         content= '?s_date=&e_date=&s_upr_cd=&s_org_cd=&s_up_kind_cd=&s_kind_cd=&s_name=&pagecnt=%d' % page
         urlcont = url+content
         #print(urlcont)
-        html = crawling(url=urlcont)
+        html = crawler(url=urlcont)
         #print(html) # 해당페이지의 전체코드가 그대로보임.
 
         bs = BeautifulSoup(html, 'html.parser')

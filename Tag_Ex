@@ -1,0 +1,36 @@
+<response>
+    <header>
+        <resultCode>00</resultCode>
+        <resultMsg>NORMAL SERVICE.</resultMsg>
+    </header>
+    <body>
+    <items>
+        <item>
+            <age>2-3(년생)</age>
+            <careAddr>경기도 안성시 봉남동 326-2</careAddr>
+            <careNm>이성준동물병원</careNm>
+            <careTel>031-673-5858</careTel>
+            <chargeNm>안성시</chargeNm>
+            <colorCd>갈색</colorCd>
+            <desertionNo>441408200900018</desertionNo>
+            <filename>http://www.animal.go.kr/files/shelter/2009/03/200903031903242.jpg</filename>
+            <happenDt>20090131</happenDt>
+            <happenPlace>미양면 마산리</happenPlace>
+            <kindCd>[개] 스탠다드 푸들</kindCd>
+            <neuterYn>U</neuterYn>
+            <noticeEdt>20090227</noticeEdt>
+            <noticeNo>경기-안성-2009-00018</noticeNo>
+            <noticeSdt>20090217</noticeSdt>
+            <officetel>031-678-5492</officetel>
+            <orgNm>경기도 안성시</orgNm>
+            <popfile>http://www.animal.go.kr/files/shelter/2009/03/200903031903242.jpg</popfile>
+            <processState>종료(안락사)</processState>
+            <sexCd>M</sexCd>
+            <specialMark>갈색</specialMark>
+            <weight>3(Kg)</weight>
+        </item>
+        <numOfRows>100</numOfRows>
+        <pageNo>1</pageNo>
+        <totalCount>992</totalCount>
+    </body>
+</response>

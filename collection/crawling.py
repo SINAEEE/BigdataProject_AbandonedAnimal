@@ -8,7 +8,7 @@ import lxml
 import pandas as pd
 import os
 
-RESULT_DIRECTORY = '__result__/crawling'
+RESULT_DIRECTORY = '../__result__/crawling'
 
 #동물관리보호소  공공데이터 API 서비스키
 SURVICE_KEY = 'kjzgwf40zX1dWlcX1PKEw2r%2BUfP1YbASnaMYa5dQ6aOr9mFJOi%2FcDQB%2FRlvaWdCVVQ5uSS%2BWwXU1WJYDAFmmBA%3D%3D'    # 김민규
@@ -46,9 +46,9 @@ def animal_url(base=base_url, **params):
     return url
 
 def animal_crawling():
-    for year in range(2017, 2019):
+    for year in range(2017, 2018):
         bgnde = '%s0101' % (year)
-        endde = '%s1231' % (year)
+        endde = '%s0101' % (year)
         pageNo = 1
         isnext = True
         datalist = []
@@ -86,9 +86,7 @@ def animal_crawling():
             df = pd.DataFrame(datalist)
             print(df)
 
-        filename = 'lostAnimal_%s_%s.csv' % (bgnde, endde)
-        df.to_csv(filename, mode='w', encoding='euc-kr')
-
+        df.to_csv('{0}/lostAnimal_{1}_{2}.csv'.format(RESULT_DIRECTORY,bgnde,endde), encoding='utf-8', mode='w', index=True)
 
 
 
@@ -124,13 +122,13 @@ def shelter_crawling():
 
     table = pd.DataFrame(results, columns=['area','name','number','address'])
     #print(table)
-    table.to_csv('shelter.csv', encoding='utf-8', mode='w',index=True)
-    #table.to_csv('{0}/shelter.csv'.format(RESULT_DIRECTORY),encoding='utf-8',mode='w',index=True)
+    #table.to_csv('shelter.csv', encoding='utf-8', mode='w',index=True)
+    table.to_csv('{0}/shelter.csv'.format(RESULT_DIRECTORY),encoding='utf-8',mode='w',index=True)
 
 
 
 
 
 if __name__ == '__main__':
-    shelter_crawling()
-    #animal_crawling()
+    #shelter_crawling()
+    animal_crawling()

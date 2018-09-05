@@ -6,6 +6,7 @@ from datetime import datetime
 import math
 import lxml
 import pandas as pd
+import os
 
 RESULT_DIRECTORY = '__result__/crawling'
 
@@ -90,6 +91,7 @@ def animal_crawling():
 
 
 
+
 def shelter_crawling():
     results = []
     for page in range(34):
@@ -117,13 +119,18 @@ def shelter_crawling():
                 results.append((area, name, number, address))
     print(results)
 
+    #if not os.path.exists(RESULT_DIRECTORY):
+    #     os.makedirs(RESULT_DIRECTORY)
 
     table = pd.DataFrame(results, columns=['area','name','number','address'])
-    table.to_csv('{0}/shelter.csv'.format(RESULT_DIRECTORY),encoding='utf-8',mode='w',index=True)
+    #print(table)
+    table.to_csv('shelter.csv', encoding='utf-8', mode='w',index=True)
+    #table.to_csv('{0}/shelter.csv'.format(RESULT_DIRECTORY),encoding='utf-8',mode='w',index=True)
+
+
 
 
 
 if __name__ == '__main__':
-    pass
-    #shelter_crawling()
+    shelter_crawling()
     #animal_crawling()

@@ -25,7 +25,7 @@ def animal_url(base=base_url, **params):
 def animal_crawling():
     for year in range(2009, 2019):  # 년도가 바뀔 때마다, pageNo, isnext 초기화
         bgnde = '%s0101' % (year)
-        endde = '%s01231' % (year)
+        endde = '%s1231' % (year)
         pageNo = 1
         isnext = True
         datalist = []
@@ -61,6 +61,7 @@ def animal_crawling():
                 pageNo += 1
 
             df = pd.DataFrame(datalist)     # Dict -> DataFrame
+            print(xml_tc)
             print(df)
 
         filename = '{0}/lostAnimal_{1}_{2}.csv'.format(RESULT_DIRECTORY,bgnde,endde)
@@ -122,8 +123,8 @@ def shelter_crawling():
 
     table = pd.DataFrame(results, columns=['area','name','number','address'])
     #print(table)
-    table.to_csv('shelter.csv', encoding='utf-8', mode='w',index=True)
-    #table.to_csv('{0}/shelter.csv'.format(RESULT_DIRECTORY),encoding='utf-8',mode='w',index=True)
+    # table.to_csv('shelter.csv', encoding='utf-8', mode='w',index=True)
+    table.to_csv('{0}/shelter.csv'.format(RESULT_DIRECTORY),encoding='utf-8',mode='w',index=True)
 
 
 if not os.path.exists(RESULT_DIRECTORY):
@@ -131,5 +132,5 @@ if not os.path.exists(RESULT_DIRECTORY):
 
 
 if __name__ == '__main__':
-    # shelter_crawling()
-    animal_crawling()
+    shelter_crawling()
+    # animal_crawling()

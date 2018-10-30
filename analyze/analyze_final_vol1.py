@@ -3,7 +3,7 @@
 
 import pymysql
 import pandas as pd
-from .reference import test
+from .reference import prediction
 
 ##example 01
 
@@ -42,6 +42,11 @@ for row in rows:
 conn.close()
 
 df = pd.DataFrame(lst, columns=cols)
+#print(df)
+
+if __name__ == '__main__':
+    prediction
+
 
 #print(df.columns)
 #print(len(df))

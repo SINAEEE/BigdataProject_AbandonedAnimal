@@ -11,8 +11,7 @@ from sklearn import metrics, preprocessing
 from scipy.stats import itemfreq
 
 
-def test():
-    pass
+
 
 
 
@@ -194,9 +193,48 @@ dft_A = df_t[feature_name]
 
 
 ### 종속변수 독립변수 추출
-X=np.array(df_A.drop(columns='processState_A')) #종속변수
-Y=np.array(df_A.processState_A) #독립변수
-X2=np.array(dft_A.drop(columns='processState_A')) #종속변수
-Y2=np.array(dft_A.processState_A) #독립변수
+X=np.array(df_A.drop(columns='processState_A')) #종속변수 train
+Y=np.array(df_A.processState_A) #독립변수 train
+X2=np.array(dft_A.drop(columns='processState_A')) #종속변수 test
+Y2=np.array(dft_A.processState_A) #독립변수 test
 
 print(X.shape)
+print(Y.shape)
+print(X2.shape)
+print(Y2.shape)
+
+
+
+### ---------------------------------------------------------모형적용
+
+knn = KNeighborsClassifier(n_neighbors=1) # n_neighbor : 이웃의 갯수
+print(knn)
+knn.fit(X, Y)
+print("\n------knn모델생성 완료------\n")
+
+
+### 예측 및 검증
+X_new = np.array([[0,3,11,2,1,0,0,1,1,0,0,0,0,0,1,0,0,4,3]])
+print("X_new.shape : {}".format(X_new.shape))
+target_A = {0:'입양X', 1:'입양O'}
+
+
+# test 값에 대한 예측
+Y_pred = knn.predict(X)
+print("\n테스트 셋에 대한 예측값: {}".format(Y_pred))
+
+
+# 임의의 생성값에 대한 예측
+prediction_A = knn.predict(X_new)
+print("\n임의의 생성값에 대한 예측:{}".format(prediction_A))
+p_A = int(prediction_A)
+print("\n 임의의 생성값으로 예측한 타깃의 이름 : {}".format(target_A[p_A]))
+
+def prediction(p1):
+    pass
+
+
+# 검증
+print( "\nKNN best accuracy : " + str(np.round(metrics.accuracy_score(Y,Y_pred),3)))
+
+

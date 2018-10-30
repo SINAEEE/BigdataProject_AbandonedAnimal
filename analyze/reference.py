@@ -230,8 +230,12 @@ print("\n임의의 생성값에 대한 예측:{}".format(prediction_A))
 p_A = int(prediction_A)
 print("\n 임의의 생성값으로 예측한 타깃의 이름 : {}".format(target_A[p_A]))
 
+
 def prediction(p1):
-    pass
+
+   prediction_Y = knn.predict(p1)
+   return prediction_Y
+
 
 
 # 검증

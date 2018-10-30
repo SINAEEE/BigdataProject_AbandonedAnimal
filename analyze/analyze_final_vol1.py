@@ -3,10 +3,10 @@
 
 import pymysql
 import pandas as pd
-from .reference import prediction
+import numpy as np
 
-##example 01
 
+print("mysql 연결 시작---------------")
 #mysql Connection 연결
 conn = pymysql.connect(host='localhost', user='root', password='qwer1234!', db='animaldb', charset='utf8')
 
@@ -19,12 +19,10 @@ curs.execute(sql)
 
 #데이터 Fetch
 
-cols = ['age(after)', 'age_u', 'careNm_AD', 'careNm_C', 'careNm_CM',
-       'careNm_ETC', 'careNm_H', 'careNm_O', 'happenMth', 'happenWd', 'kind',
-       'neuterYn', 'neuterYn_N', 'neuterYn_U', 'neuterYn_Y', 'noticeEdt',
-       'orgNm', 'processState_A', 'processState_C', 'processState_D',
-       'processState_E', 'processState_Pre', 'processState_R', 'sexCd',
-       'sexCd_F', 'sexCd_M', 'sexCd_Q', 'size', 'weight(after)', 'sido']
+cols = ['kind', 'happenWd', 'happenMth', 'size', 'age_u', 'sexCd_M', 'sexCd_F',
+       'sexCd_Q', 'neuterYn_Y', 'neuterYn_N', 'neuterYn_U', 'careNm_ETC',
+       'careNm_H', 'careNm_C', 'careNm_O', 'careNm_AD', 'careNm_CM', 'sido',
+       'processState_A', 'sido.1']
 
 lst = []
 
@@ -32,21 +30,35 @@ rows = curs.fetchall()
 for row in rows:
     #print(row)
 
-    lst.append([row['age(after)'], row['age_u'], row['careNm_AD'], row['careNm_C'], row['careNm_CM'],
-          row['careNm_ETC'], row['careNm_H'], row['careNm_O'], row['happenMth'], row['happenWd'], row['kind'],
-          row['neuterYn'], row['neuterYn_N'], row['neuterYn_U'], row['neuterYn_Y'], row['noticeEdt'],
-          row['orgNm'], row['processState_A'], row['processState_C'], row['processState_D'],
-          row['processState_E'], row['processState_Pre'], row['processState_R'], row['sexCd'],
-          row['sexCd_F'], row['sexCd_M'], row['sexCd_Q'], row['size'], row['weight(after)'], row['sido']])
+    lst.append([row['kind'], row['happenWd'], row['happenMth'], row['size'], row['age_u'], row['sexCd_M'], row['sexCd_F'],
+                row['sexCd_Q'], row['neuterYn_Y'], row['neuterYn_N'], row['neuterYn_U'], row['careNm_ETC'],
+                row['careNm_H'], row['careNm_C'], row['careNm_O'], row['careNm_AD'], row['careNm_CM'], row['sido'],
+                row['processState_A'], row['sido.1']])
 
 conn.close()
 
 df = pd.DataFrame(lst, columns=cols)
-#print(df)
+print("전일자 df 생성 완료-----------------")
+
+
+
+from analyze.reference import prediction
+
+
+P = np.array(df.drop(columns='processState_A'))
+print(P)
+print(P.shape)
 
 if __name__ == '__main__':
-    prediction
+    suc = prediction(P)
+    print("함수 성공")
+    print(suc)
+    print(len(suc))
 
+print(type(suc)) # numpy.ndarray
+
+df2 = pd.DataFrame(suc)
+df2.to_csv("final.csv", encoding='euc-kr', index=False)
 
 #print(df.columns)
 #print(len(df))

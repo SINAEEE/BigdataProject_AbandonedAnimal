@@ -187,7 +187,7 @@ print("\n18년도 현재상태 전처리 확인 : \n{}".format(df_t['processStat
 feature_name = ['kind', 'happenWd', 'happenMth','size','age_u', 'sexCd_M',
                'sexCd_F', 'sexCd_Q', 'neuterYn_Y', 'neuterYn_N', 'neuterYn_U',
                'careNm_ETC', 'careNm_H', 'careNm_C', 'careNm_O', 'careNm_AD',
-               'careNm_CM', 'sido','processState_A', 'sido']
+               'careNm_CM','processState_A', 'sido']
 df_A = df[feature_name]
 dft_A = df_t[feature_name]
 
@@ -225,10 +225,10 @@ print("\n테스트 셋에 대한 예측값: {}".format(Y_pred))
 
 
 # 임의의 생성값에 대한 예측
-prediction_A = knn.predict(X_new)
-print("\n임의의 생성값에 대한 예측:{}".format(prediction_A))
-p_A = int(prediction_A)
-print("\n 임의의 생성값으로 예측한 타깃의 이름 : {}".format(target_A[p_A]))
+#prediction_A = knn.predict(X_new)
+#print("\n임의의 생성값에 대한 예측:{}".format(prediction_A))
+#p_A = int(prediction_A)
+#print("\n 임의의 생성값으로 예측한 타깃의 이름 : {}".format(target_A[p_A]))
 
 
 def prediction(p1):

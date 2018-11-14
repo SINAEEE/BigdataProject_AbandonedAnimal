@@ -10,16 +10,17 @@ from datetime import datetime
 print("mysql 연결 시작---------------")
 
 ## mysql Connection 연결
-conn = pymysql.connect(host='localhost', user='root', password='qwer1234!', db='animaldb', charset='utf8')
+conn = pymysql.connect(host='localhost', port=3307, user='root', password='qwer1234!', db='animaldb', charset='utf8')
 
 ## Connection으로부터 Dictionary cursor 생성
 curs = conn.cursor(pymysql.cursors.DictCursor)
 
 ## SQL문 실행
-sql = "select * from animal_realtime_2018"
+#sql = "select * from animal_total"
+sql = "select * from animal_total where happenDt like '20181101'";
 curs.execute(sql)
 
-## 데이터 Fetch
+## 데이터 Fetchㄱ
 
 cols = ['kind', 'happenWd', 'happenMth', 'size', 'age_u', 'sexCd_M', 'sexCd_F',
        'sexCd_Q', 'neuterYn_Y', 'neuterYn_N', 'neuterYn_U', 'careNm_ETC',
@@ -44,7 +45,7 @@ print("전일자 df 생성 완료-----------------")
 
 
 
-from analyze.reference import prediction
+from analyze.reference_rf import prediction
 
 
 P = np.array(df.drop(columns='processState_A'))
@@ -74,7 +75,7 @@ print("\n 현재 날짜 : ", ydate)
 
 ## 데이터 삽입
 
-conn = pymysql.connect(host='localhost', user='root', password='qwer1234!', db='animaldb', charset='utf8mb4')
+conn = pymysql.connect(host='localhost',  port=3307, user='root', password='qwer1234!', db='animaldb', charset='utf8mb4')
 
 try:
     with conn.cursor() as cursor:
@@ -87,7 +88,6 @@ try:
 
 finally:
     conn.close()
-
 
 
 

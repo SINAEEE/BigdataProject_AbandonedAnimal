@@ -10,13 +10,13 @@ from datetime import datetime
 print("mysql 연결 시작---------------")
 
 ## mysql Connection 연결
-conn = pymysql.connect(host='localhost', user='root', password='qwer1234!', db='animaldb', charset='utf8')
+conn = pymysql.connect(host='localhost', port=3307, user='root', password='qwer1234!', db='animaldb', charset='utf8')
 
 ## Connection으로부터 Dictionary cursor 생성
 curs = conn.cursor(pymysql.cursors.DictCursor)
 
 ## SQL문 실행
-sql = "select * from animal_new"
+sql = "select * from animal_total"
 curs.execute(sql)
 
 ## 데이터 Fetch
@@ -35,7 +35,7 @@ for row in rows:
     lst.append([row['kind'], row['happenWd'], row['happenMth'], row['size'], row['age_u'], row['sexCd_M'], row['sexCd_F'],
                 row['sexCd_Q'], row['neuterYn_Y'], row['neuterYn_N'], row['neuterYn_U'], row['careNm_ETC'],
                 row['careNm_H'], row['careNm_C'], row['careNm_O'], row['careNm_AD'], row['careNm_CM'], row['sido'],
-                row['processState_A'], row['sido.1']])
+                row['processState_A']])
 
 conn.close()
 
@@ -44,7 +44,7 @@ print("전일자 df 생성 완료-----------------")
 
 
 
-from analyze.reference import prediction
+from analyze.reference_old import prediction
 
 
 P = np.array(df.drop(columns='processState_A'))

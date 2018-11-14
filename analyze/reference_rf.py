@@ -1,16 +1,9 @@
 
 import pandas as pd
 import numpy as np
-import os
-import matplotlib.pyplot as plt
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
-
-from sklearn import metrics, preprocessing
-from scipy.stats import itemfreq
-
-
+from sklearn.model_selection import GridSearchCV
+from sklearn import metrics
 
 
 
@@ -205,40 +198,55 @@ print(Y2.shape)
 
 
 
-### ---------------------------------------------------------모형적용
+### GridSearchCV함수를 통한 파라미터 최적화
 
-knn = KNeighborsClassifier(n_neighbors=1) # n_neighbor : 이웃의 갯수
-print(knn)
-knn.fit(X, Y)
-print("\n------knn모델생성 완료------\n")
+estimator_grid = np.arange(1, 30, 5)
+depth_grid = np.arange(1, 10, 2)
+parameters = {'n_estimators': estimator_grid, 'max_depth': depth_grid}
+
+gridCV = GridSearchCV(RandomForestClassifier(), param_grid=parameters, cv=10, n_jobs=4)
+gridCV.fit(X, Y);
+
+best_n_estim = gridCV.best_params_['n_estimators']
+best_depth = gridCV.best_params_['max_depth']
+
+print("Random Forest best n estimator : " + str(best_n_estim))
+print("Random Forest best depth : " + str(best_depth))
+
+### 최적화된 파라미터를 이용한 모델 생성
+RF_best = RandomForestClassifier(max_depth=best_depth,n_estimators=best_n_estim,random_state=3)
+RF_best.fit(X, Y);
+
+print("\n------Random Forest 모델 생성 완료------\n")
 
 
 ### 예측 및 검증
 X_new = np.array([[0,3,11,2,1,0,0,1,1,0,0,0,0,0,1,0,0,4,3]])
 print("X_new.shape : {}".format(X_new.shape))
-target_A = {0:'입양X', 1:'입양O'}
+target = {0:'입양X', 1:'입양O'}
 
+"""
+# 임의의 생성값에 대한 예측
+prediction = RF_best.predict(X_new)
+print("예측:{}".format(prediction))
+p = int(prediction)
+print("예측한 타깃의 이름 : {}".format(target[p]))
+"""
 
 # test 값에 대한 예측
-Y_pred = knn.predict(X)
-print("\n테스트 셋에 대한 예측값: {}".format(Y_pred))
+Y_pred =RF_best.predict(X2)
+print("테스트 셋에 대한 예측값: {}".format(Y_pred))
 
-
-# 임의의 생성값에 대한 예측
-#prediction_A = knn.predict(X_new)
-#print("\n임의의 생성값에 대한 예측:{}".format(prediction_A))
-#p_A = int(prediction_A)
-#print("\n 임의의 생성값으로 예측한 타깃의 이름 : {}".format(target_A[p_A]))
+# test값에 대한 정확도 측정 (검증)
+print( "Random Forest best accuracy(test) : " + str(np.round(metrics.accuracy_score(Y2,Y_pred),3)))
 
 
 def prediction(p1):
 
-   prediction_Y = knn.predict(p1)
+   prediction_Y = RF_best.predict(p1)
    return prediction_Y
 
 
 
-# 검증
-print( "\nKNN best accuracy : " + str(np.round(metrics.accuracy_score(Y,Y_pred),3)))
 
 
